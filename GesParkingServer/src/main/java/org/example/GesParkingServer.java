@@ -15,9 +15,10 @@ public class GesParkingServer {
        try{
            ParkingController gesParking = new ParkingController();
            IParking stub = (IParking) UnicastRemoteObject.exportObject(gesParking,0);
-           LocateRegistry.createRegistry(2000);
-           Naming.rebind("rmi://localhost:2000/parking", stub);
+           LocateRegistry.createRegistry(8000);
+           Naming.rebind("rmi://localhost:8000/parking", stub);
            System.out.println("Server started");
+
 
        } catch (RemoteException | MalformedURLException e){
            System.out.println(String.format("error: %s", e.getMessage()));

@@ -12,6 +12,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ParkingController  {
 
@@ -23,17 +24,11 @@ public class ParkingController  {
     Utilisateurs utilisateur = null;
     String message= "";
 
+
     public ParkingController(ParkingView view){
         this.view = view;
         this.view.setController(this);
-        try{
-            this.parking = (IParking) Naming.lookup("rmi://localhost:2000/parking");
-
-        }catch(MalformedURLException | RemoteException | NotBoundException e){
-            e.printStackTrace();
-        }
     }
-
 
 
     public void run() throws RemoteException {
@@ -42,12 +37,12 @@ public class ParkingController  {
         }
     }
 
-    public void recupererVehicule() throws RemoteException {
-        menus.recupererActions(parking);
+    public void recupererVoiture(IParking parking) throws RemoteException {
+        menus.recuperer(parking);
     }
 
-    public void stationnerVehicule() throws RemoteException {
-        menus.stationnerActions(utilisateur,parking);
+    public void stationnerVehicule(Utilisateurs utilisateur, IParking parking) throws RemoteException {
+        menus.stationner(utilisateur,parking);
     }
 
     public void StopApp(){
